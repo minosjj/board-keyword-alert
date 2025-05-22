@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 게시판 및 키워드 알림 서비스
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 1. 간단소개
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+이 프로젝트는 NestJS와 MySQL을 기반으로 한 게시판 서비스입니다.  
+게시글 작성, 수정, 삭제 및 댓글 작성, 삭제 기능을 지원하며,  
+특정 키워드가 포함된 게시글이나 댓글이 등록될 때 키워드 등록자에게 알림을 보내는 키워드 알림 기능을 포함하고 있습니다.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+## 2. 저장소 클론 및 패키지 설치
 
 ```bash
-$ npm install
+git clone <REPOSITORY_URL>
+cd <PROJECT_FOLDER>
+
+# npm 사용 시
+npm install
+
+# 또는 yarn 사용 시
+yarn install
 ```
 
-## Running the app
+## 3. MySQL 데이터베이스 설정
+
+- MySQL 서버가 실행 중인지 확인하세요. (로컬 또는 도커 환경)
+- 데이터베이스 생성 예시 (MySQL 클라이언트에서 실행):
+
+```sql
+CREATE DATABASE ${database_name};
+```
+
+## 4. 환경변수 설정
+
+- 프로젝트 루트에 있는 .env.example 파일을 .env로 복사 후 수정하세요:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cp .env.example .env
 ```
 
-## Test
+- .env 파일에서 DB 접속 정보 등 환경변수를 본인 환경에 맞게 수정합니다.
+
+## 5. DB 스키마 생성
+
+- 준비된 스키마 파일 scripts/schema.sql을 아래 명령어로 실행하여 테이블을 생성하세요:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+mysql -h ${db_host} -P ${port} -u ${username} -p ${database_name} < scripts/schema.sql
 ```
 
-## Support
+- 명령어 실행 후 비밀번호 입력 프롬프트가 나타납니다.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 6. 프로그램 실행
 
-## Stay in touch
+- 서버 실행:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+yarn run start
+npm run start
+```
 
-## License
+- 단위 테스트 실행:
 
-Nest is [MIT licensed](LICENSE).
+```bash
+yarn run test
+npm run test
+```
