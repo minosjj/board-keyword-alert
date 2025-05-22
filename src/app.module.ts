@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CommentsModule } from 'src/comments/comments.module';
+import { PostsModule } from 'src/posts/posts.module';
+import { KeywordAlertModule } from 'src/alerts/keyword-alert.module';
 
 @Module({
   imports: [
@@ -18,6 +21,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: false,
       logging: false,
     }),
+    PostsModule,
+    CommentsModule,
+    KeywordAlertModule,
   ],
   controllers: [],
   providers: [],
